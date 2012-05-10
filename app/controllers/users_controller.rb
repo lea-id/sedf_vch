@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     # сделать текущего пользователя адмиристратором
-    #current_user.update_attribute :admin, true
+    current_user.update_attribute :admin, true
     @user = User.find(params[:id])
     @title = @user.username
     #@user_internals = @user.user_internals.paginate(page: params[:page])
