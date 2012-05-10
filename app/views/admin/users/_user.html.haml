@@ -1,0 +1,13 @@
+%li
+  // адмиристратор не может удалить себя
+  - if current_user.admin? && !user.admin
+    = gravatar_for user, :size => 30
+    = user.fullname.nil? ? user.username : user.fullname + " (" + user.username + ")"
+    - if user.activated?
+      (активен)
+    - else
+      (не активен)
+    = link_to "Изменить", edit_admin_user_path(user)
+    //= link_to "Удалить", admin_user_path(user), :method => :delete, :confirm => "Вы уверены?", :title => "Удалить пользователя #{user.username}"
+
+%br

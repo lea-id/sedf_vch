@@ -1,0 +1,6 @@
+%table.profile{:summary => "Profile information"}
+  %tr
+    %td.main
+      %h1
+        = gravatar_for @user
+        = @user.fullname.nil? ? @user.username : @user.fullname

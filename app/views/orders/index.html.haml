@@ -1,0 +1,45 @@
+%h1 Книга учета приказов и директив (основной раздел)
+
+%table{:border => "1"}
+  %tr
+    %th{:rowspan => "2"} Порядковые номера приказов (директив)
+    %th{:rowspan => "2"} Дата подписи
+    %th{:colspan => "3"} Подписано или получено
+    %th{:rowspan => "2"}
+    %th{:rowspan => "2"}
+    %th{:rowspan => "2"}
+    %th{:rowspan => "2"}
+
+  %tr
+    %th Кто подписал или откуда получен приказ (директива). Дата и номер сопросодительного письма
+    %th Краткое содержание приказа (директивы)
+    %th Количество экз.
+
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th
+    %th
+    %th
+    %th
+
+  - @orders.each do |order|
+    %tr
+      %td= order.serial_no
+      %td= order.sign_date.strftime("%d.%m.%Y г.")
+      %td= order.someone
+      %td= order.description
+      %td= order.copy_count
+      %td= link_to 'Дополнительный раздел', order_order_sents_path(order)
+      %td= link_to 'Показать', order
+      %td= link_to 'Изменить', edit_order_path(order)
+      %td= link_to 'Удалить', order, :confirm => 'Вы уверены?', :method => :delete
+
+%br
+
+= link_to 'Новый документ', new_order_path
+//\|
+//= link_to 'Назад', user_path(current_user)

@@ -1,0 +1,7 @@
+system 'gem pg'
+system 'gem haml-rails'
+system 'gem will_paginate'
+system 'gem gravatar_image_tag'
+system 'gem russian'
+system 'export RDOCOPT="--encoding=UTF-8"'
+system 'gem install i18n'

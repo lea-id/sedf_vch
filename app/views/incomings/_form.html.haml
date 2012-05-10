@@ -1,0 +1,64 @@
+= form_for @incoming do |f|
+  -if @incoming.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@incoming.errors.count, "error")} prohibited this incoming from being saved:"
+      %ul
+        - @incoming.errors.full_messages.each do |msg|
+          %li= msg
+
+  //:javascript
+  //  $(function() {
+  //    $( "#incoming_doc_date" ).datepicker($.datepicker.regional['ru']);
+  //  });
+  
+  :javascript
+    window.onload = function(){
+      new JsDatePick({
+        useMode:2,
+        target:"incoming_doc_date",
+        dateFormat:"%d.%m.%Y"
+      });
+    };
+
+  .field
+    = f.label :doc_no, 'Номер поступившего документа'
+    = f.text_field :doc_no, :size => 10
+  .field
+    = f.label :doc_date, 'Дата поступившего документа'
+    - if @incoming.doc_date == nil
+      = f.text_field :doc_date, :size => 10, :value => Date.current.strftime("%d.%m.%Y")
+    - else
+      = f.text_field :doc_date, :size => 10, :value => @incoming.doc_date.strftime("%d.%m.%Y")
+  .field
+    = f.label :address, 'Откуда поступил или кому отправлен документ'
+    = f.text_field :address
+  .field
+    = f.label :description, 'Наименование или краткое содержание документа'
+    = f.text_field :description
+  .field
+    = f.label :copy_count, 'Количество экземпляров'
+    = f.number_field :copy_count
+  .field
+    = f.label :copy_no, 'Номера экземпляров'
+    = f.text_field :copy_no
+  .field
+    = f.label :pages, 'Количество листов'
+    = f.number_field :pages
+  //.field
+  //  = f.label :user_id, 'Кому передан документ на исполнение или кем исполнен документ'
+  //  = f.select("user_id", User.where(:admin => false).order("id").collect {|p| [ p.name, p.id ] }, { :prompt => true, :include_blank => false })
+  //.field
+  //  = f.label :in_out_no, 'Какой входящий номер исполнен или каким исходящим номером исполнен документ'
+  //  = f.number_field :in_out_no
+  .field
+    = f.label :delo_no, 'номер дела'
+    = f.number_field :delo_no
+  .field
+    = f.label :delo_pages, 'номера листов'
+    = f.text_field :delo_pages
+  .field
+    = f.label :attach, "Электронная копия документа"
+    = @incoming.attach
+    = f.file_field :attach
+  .actions
+    = f.submit 'Сохранить'

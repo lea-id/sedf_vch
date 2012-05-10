@@ -1,0 +1,19 @@
+%h1 Список ролей
+
+%table{ :border => "1" }
+  %tr
+    %th Наименование роли
+    %th
+    %th
+    %th
+
+  - @roles.each do |role|
+    %tr
+      %td= role.name
+      %td= link_to 'Показать', role
+      %td= link_to 'Изменить', edit_role_path(role)
+      %td= link_to 'Удалить', role, :confirm => 'Вы уверены?', :method => :delete
+
+%br
+
+= link_to 'Новая роль', new_role_path

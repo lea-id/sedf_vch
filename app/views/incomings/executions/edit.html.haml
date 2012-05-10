@@ -1,0 +1,7 @@
+%h1 Изменение документа
+
+= render 'form'
+
+= link_to 'Показать', incoming_execution_path(@incoming, @execution)
+\|
+= link_to 'Назад', incoming_executions_path(@incoming)

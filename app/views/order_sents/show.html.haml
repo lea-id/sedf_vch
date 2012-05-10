@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b who
+  = @ordersent.who
+  %br
+  %b letter
+  = @ordersent.letter
+  %br
+  %b copy_count
+  = @ordersent.copy_count
+  %br
+  %b delo
+  = @ordersent.delo
+
+= link_to 'Изменить', edit_order_order_sent_path(@order, @ordersent)
+\|
+= link_to 'Назад', order_order_sents_path(@order)

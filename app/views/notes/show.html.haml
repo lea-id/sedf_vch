@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Дата поступления служебного документа в воинскую часть
+  = @note.date_incoming.strftime("%d.%m.%Y г.")
+  %br
+  %b Кому объявлен (до кого доведен) служебный документ и дата
+  = @user.fullname + " " + @note.date_finishing.strftime("%d.%m.%Y г.")
+ 
+= link_to 'Изменить', edit_note_path(@note)
+\|
+= link_to 'Назад', notes_path

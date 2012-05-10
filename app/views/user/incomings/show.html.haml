@@ -1,0 +1,17 @@
+%p#notice= notice
+
+-if @incoming.attach?
+  -if !@incoming.is_pdf(@incoming.attach.url)
+    %img{:src => @incoming.attach, :width => "100%"}
+  -if @incoming.is_pdf(@incoming.attach.url)
+    :javascript
+      window.onload = function (){
+        var success = new PDFObject({ url: @incoming.attach }).embed("pdf");
+      };
+    #pdf
+      %object{:data => @incoming.attach.url, :height => "100%", :type => "application/pdf", :width => "100%"}
+-else
+  %p
+    %b Электронная копия документа отсутствует
+
+= link_to 'Назад', uii_path

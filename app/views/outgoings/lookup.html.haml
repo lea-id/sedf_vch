@@ -1,0 +1,50 @@
+%h1 Поиск документа
+
+= render 'form_lookup'
+
+%table{:border => "1"}
+  %tr
+    %th{:rowspan => "2"} Порядковый номер (входящий, исходящий)
+    %th{:rowspan => "2"} Номер поступившего документа
+    %th{:rowspan => "2"} Дата поступившего документа
+    %th{:rowspan => "2"} Откуда поступил или кому отправлен документ
+    %th{:rowspan => "2"} Наименование или краткое содержание документа
+    %th{:rowspan => "2"} Количество экземпляров
+    %th{:rowspan => "2"} Номера экземпляров
+    %th{:rowspan => "2"} Количество листов
+    %th{:rowspan => "2"} Кому передан документ на исполнение или кем исполнен документ
+    %th{:rowspan => "2"} Какой входящий номер исполнен или каким исходящим номером исполнен документ
+    %th{:colspan => "2"} Отметка о подшивке, отправке или уничтожении документа
+  %tr
+    %th номер дела
+    %th номера листов
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th 6
+    %th 7
+    %th 8
+    %th 9
+    %th 10
+    %th 13
+    %th 14
+
+  - @lookups.each do |lookup|
+    %tr
+      %td= lookup.serial_no
+      %td= lookup.doc_no
+      %td= lookup.doc_date.nil? ? "" : lookup.doc_date.strftime("%d.%m.%Y г.")
+      %td= lookup.address
+      %td= lookup.description
+      %td= lookup.copy_count
+      %td= lookup.copy_no
+      %td= lookup.pages
+      %td= lookup.user_id.nil? ? "" : User.find_by_id(lookup.user_id).fullname
+      %td= lookup.in_out_no.nil? ? "" : "Вх. № " + lookup.in_out_no.to_s
+      %td= lookup.delo_no
+      %td= lookup.delo_pages
+%br
+= link_to 'Назад', outgoings_path

@@ -1,0 +1,47 @@
+= form_for([@incoming, @note]) do |f|
+  -if @note.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@note.errors.count, "error")} prohibited this note from being saved:"
+      %ul
+        - @note.errors.full_messages.each do |msg|
+          %li= msg
+
+  //:javascript
+  //  $(function() {
+  //    $( "#note_date_incoming" ).datepicker($.datepicker.regional['ru']);
+  //  });
+  
+  :javascript
+    window.onload = function(){
+      new JsDatePick({
+        useMode:2,
+        target:"note_date_incoming",
+        dateFormat:"%d.%m.%Y"
+      });
+    };
+    window.onload = function(){
+      new JsDatePick({
+        useMode:2,
+        target:"note_date_finishing",
+        dateFormat:"%d.%m.%Y"
+      });
+    };
+
+  .field
+    = f.label :date_incoming, 'Дата поступления служебного документа в воинскую часть'
+    - if @note.date_incoming == nil
+      = f.text_field :date_incoming, :value => Date.current.strftime("%d.%m.%Y")
+    - else
+      = f.text_field :date_incoming, :value => @note.date_incoming.strftime("%d.%m.%Y")
+  .field
+    = f.label :user_id, 'Кому объявлен (до кого доведен) служебный документ'
+    //= f.text_field :user_id
+    = f.select("user_id", User.where(:admin => false).order("id").collect {|p| [ p.fullname, p.id ] }, { :prompt => true, :include_blank => false })
+  .field
+    = f.label :date_finishing, 'Дата объявления (доведения) служебного документа'
+    - if @note.date_incoming == nil
+      = f.text_field :date_finishing, :value => Date.current.strftime("%d.%m.%Y")
+    - else
+      = f.text_field :date_finishing, :value => @note.date_finishing.strftime("%d.%m.%Y")
+  .actions
+    = f.submit 'Сохранить'

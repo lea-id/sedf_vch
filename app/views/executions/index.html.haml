@@ -1,0 +1,70 @@
+%h1 Журнал контроля за исполнением служебных документов
+
+%table{:border => "1"}
+  %tr
+    %th № п/п
+    %th Откуда поступил документ, его номер и дата
+    %th Регистрационный номер и дата
+    %th Краткое содержание документа
+    %th Поручение должностного лица по исполнению документа
+    %th Срок исполнения
+    %th Исполнитель
+    %th Данные контроля
+    %th Основание для снятия с контроля
+    %th
+    %th
+    %th
+    %th
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th 6
+    %th 7
+    %th 8
+    %th 9
+    %th
+    %th
+    %th
+    %th
+
+  - @executions.each do |execution|
+    %tr
+      %td= execution.serial_no
+      - incoming = Incoming.find_by_id(execution.incoming_id)
+      %td= incoming.address
+      %td= "№ " + incoming.doc_no + " от "+ incoming.doc_date.strftime("%d.%m.%Y г.")
+      %td= incoming.description
+      %td= execution.resolution
+      // цвет ячейки
+      - if (execution.execute_to - Date.today).to_i < 0 && !execution.data_control.nil?
+        %td{ :bgcolor => :red }= execution.execute_to.strftime("%d.%m.%Y г.")
+      - else
+        -if (execution.execute_to - Date.today).to_i < 3 && !execution.data_control.nil?
+          %td{ :bgcolor => :orange }= execution.execute_to.strftime("%d.%m.%Y г.")
+        - else
+          - if (execution.execute_to - Date.today).to_i < 5 && !execution.data_control.nil?
+            %td{ :bgcolor => :yellow }= execution.execute_to.strftime("%d.%m.%Y г.")
+          - else
+            %td= execution.execute_to.strftime("%d.%m.%Y г.")
+      %td= execution.user_id.nil? ? "" : User.find_by_id(execution.user_id).fullname
+      %td= execution.data_control
+      %td= execution.done
+      - if execution.data_control == ""
+        %td= link_to 'Исполнено', new_incoming_execution_outgoing_path(execution.incoming_id, execution)
+      - else
+        %td= link_to 'Исполнено', '#'
+      - if execution.data_control != ""
+        %td= link_to 'Исходящий', incoming_execution_outgoings_path(execution.incoming_id, execution)
+      - else
+        %td= link_to 'Исходящий', '#'
+      %td= link_to 'Изменить', edit_execution_path(execution)
+      %td= link_to 'Удалить', execution, :confirm => 'Вы уверены?', :method => :delete
+
+%br
+
+//= link_to 'Новый документ', new_incoming_execution_path(@incoming)
+//\|
+//= link_to 'Назад', user_path(current_user)

@@ -1,0 +1,24 @@
+%title Система электронного документооборота воинской части | = @title
+%h1 Настройка пользователя
+
+= form_for(@user) do |f|
+  = render 'shared/error_messages', :object => f.object
+  .field
+    = f.label :username
+    %br
+    = f.text_field :username
+  .field
+    = f.label :email
+    %br
+    = f.text_field :email
+  .field
+    = f.label :fullname
+    %br
+    = f.text_field :fullname
+  .actions
+    = f.submit "Обновить"
+  = link_to 'Сменить пароль', edit_user_password_path(@user)
+  %br
+  %br
+  = gravatar_for @user
+  %a{:href => "http://gravatar.com/emails"} Изменить граватар

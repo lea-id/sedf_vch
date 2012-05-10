@@ -1,0 +1,52 @@
+%h1 Мои документы (входящие)
+
+%table{:border => "1"}
+  %tr
+    %th{:rowspan => "2"} Порядковый номер (входящий, исходящий)
+    %th{:rowspan => "2"} Номер поступившего документа
+    %th{:rowspan => "2"} Дата поступившего документа
+    %th{:rowspan => "2"} Откуда поступил или кому отправлен документ
+    %th{:rowspan => "2"} Наименование или краткое содержание документа
+    %th{:rowspan => "2"} Количество экземпляров
+    %th{:rowspan => "2"} Номера экземпляров
+    %th{:rowspan => "2"} Количество листов
+    %th{:rowspan => "2"} Кому передан документ на исполнение или кем исполнен документ
+    %th{:rowspan => "2"} Какой входящий номер исполнен или каким исходящим номером исполнен документ
+    %th{:colspan => "2"} Отметка о подшивке, отправке или уничтожении документа
+    %th{:rowspan => "2"}
+  %tr
+    %th номер дела
+    %th номера листов
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th 6
+    %th 7
+    %th 8
+    %th 9
+    %th 10
+    %th 13
+    %th 14
+    %th
+
+  - @incomings.each do |incoming|
+    %tr
+      %td= incoming.serial_no
+      %td= incoming.doc_no
+      %td= incoming.doc_date.strftime("%d.%m.%Y г.")
+      %td= incoming.address
+      %td= incoming.description
+      %td= incoming.copy_count
+      %td= incoming.copy_no
+      %td= incoming.pages
+      %td= incoming.user_id.nil? ? "" : User.find_by_id(incoming.user_id).fullname
+      %td= incoming.in_out_no.nil? ? "" : "Исх. № " + incoming.in_out_no.to_s
+      %td= incoming.delo_no
+      %td= incoming.delo_pages
+      %td= link_to 'Показать', user_incomings_path(incoming)
+%br
+
+//= link_to 'Назад', user_path(current_user)

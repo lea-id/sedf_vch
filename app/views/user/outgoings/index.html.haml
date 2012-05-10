@@ -1,0 +1,56 @@
+%h1 Мои документы (исходящие)
+
+%table{:border => "1"}
+  %tr
+    %th{:rowspan => "2"} Порядковый номер (входящий, исходящий)
+    %th{:rowspan => "2"} Номер поступившего документа
+    %th{:rowspan => "2"} Дата поступившего документа
+    %th{:rowspan => "2"} Откуда поступил или кому отправлен документ
+    %th{:rowspan => "2"} Наименование или краткое содержание документа
+    %th{:rowspan => "2"} Количество экземпляров
+    %th{:rowspan => "2"} Номера экземпляров
+    %th{:rowspan => "2"} Количество листов
+    %th{:rowspan => "2"} Кому передан документ на исполнение или кем исполнен документ
+    %th{:rowspan => "2"} Какой входящий номер исполнен или каким исходящим номером исполнен документ
+    %th{:colspan => "2"} Отметка о подшивке, отправке или уничтожении документа
+    %th{:rowspan => "2"}
+  %tr
+    %th номер дела
+    %th номера листов
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th 6
+    %th 7
+    %th 8
+    %th 9
+    %th 10
+    %th 13
+    %th 14
+    %th
+
+  - @outgoings.each do |outgoing|
+    %tr
+      %td= outgoing.serial_no
+      %td= outgoing.doc_no
+      - if outgoing.doc_date != nil
+        %td= outgoing.doc_date.strftime("%d.%m.%Y г.")
+      - else
+        %td= ""
+      %td= outgoing.address
+      %td= outgoing.description
+      %td= outgoing.copy_count
+      %td= outgoing.copy_no
+      %td= outgoing.pages
+      %td= outgoing.user_id.nil? ? "" : User.find_by_id(outgoing.user_id).fullname
+      %td= outgoing.in_out_no.nil? ? "" : "Вх. № " + outgoing.in_out_no.to_s
+      %td= outgoing.delo_no
+      %td= outgoing.delo_pages
+      %td= link_to 'Показать', user_outgoings_path(outgoing)
+
+%br
+
+//= link_to 'Назад', user_path(current_user)

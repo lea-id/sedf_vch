@@ -1,0 +1,5 @@
+ru:
+  attributes:
+    name: "Имя"
+    email: "Адрес электронной почты"
+    password: "Пароль"

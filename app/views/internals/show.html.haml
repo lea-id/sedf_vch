@@ -1,0 +1,32 @@
+%p#notice= notice
+
+//%p
+//  %b Title:
+//  = @internal.title
+//%p
+//  %b Description:
+//  = @internal.description
+//%p
+//  %b Attach:
+//  = @internal.attach
+//%p
+//  %b User:
+//  = @internal.user
+
+-if @internal.attach?
+  -if !@internal.is_pdf(@internal.attach.url)
+    %img{:src => @internal.attach, :width => "100%"}
+  -if @internal.is_pdf(@internal.attach.url)
+    :javascript
+      window.onload = function (){
+        var success = new PDFObject({ url: @internal.attach }).embed("pdf");
+      };
+    #pdf
+      %object{:data => @internal.attach.url, :height => "100%", :type => "application/pdf", :width => "100%"}
+-else
+  %p
+    %b Электронная копия документа отсутствует
+
+= link_to 'Изменить', edit_user_internal_path(current_user, @internal)
+\|
+= link_to 'Назад', user_internals_path(current_user)

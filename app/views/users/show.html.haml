@@ -1,0 +1,66 @@
+%table.profile{:summary => "Profile information"}
+  %tr
+    %td.main
+      %h1
+        = gravatar_for @user
+        = @user.fullname.nil? ? @user.username : @user.fullname + " (" + @user.username + ")"
+    %td.sidebar.round
+      %strong Имя пользователя
+      = @user.fullname.nil? ? @user.username : @user.fullname
+      %br
+      %strong Страница пользователя
+      = link_to user_path(@user), @user
+
+  - if current_user.admin?
+    %tr
+      %td
+        %h1 Управление ролями
+        %br
+      %td
+        %h1
+        = link_to 'Список ролей', roles_path
+          
+  - if !current_user.admin? && current_user.role?('secretary') && current_user.activated?
+    %tr
+      %td
+        %h1 Учет документов
+        %br
+      %td
+        %h1
+        = link_to 'Журнал учета служебных документов (входящий)', incomings_path
+        = link_to 'Журнал учета служебных документов (исходящий)', outgoings_path
+        = link_to 'Книга учета приказов и директив', orders_path
+
+  - if !current_user.admin? && current_user.role?('secretary') && current_user.activated?
+    %tr
+      %td
+        %h1 Контроль
+        %br
+      %td
+        %h1
+        = link_to 'Журнал контроля за исполнением служебных документов', executions_path
+        = Execution.not_executed?
+        %br
+        = link_to 'Журнал учета объявления приказов, директив и других служебных документов', notes_path
+
+  - if !current_user.admin? && current_user.role?('operator') && current_user.activated?
+    %tr
+      %td
+        %h1 Работа с моими документами
+        %br
+        %br
+        %br
+        %br
+        %br
+      %td
+        %h1
+        = link_to 'Мои документы (входящие)', user_incomings_path
+        %br
+        = link_to 'Мои документы (исходящие)', user_outgoings_path
+        %br
+        = link_to 'Мои документы (ознакомление)', user_notes_path
+        %br
+        = link_to 'Мои документы (исполнение)', user_executions_path
+        = Execution.not_executed(current_user)
+        %br
+        = link_to 'Мои документы (служебные)', user_internals_path(@user)

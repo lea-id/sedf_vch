@@ -1,0 +1,112 @@
+                           roles GET    /roles(.:format)                                                              roles#index
+                                 POST   /roles(.:format)                                                              roles#create
+                        new_role GET    /roles/new(.:format)                                                          roles#new
+                       edit_role GET    /roles/:id/edit(.:format)                                                     roles#edit
+                            role GET    /roles/:id(.:format)                                                          roles#show
+                                 PUT    /roles/:id(.:format)                                                          roles#update
+                                 DELETE /roles/:id(.:format)                                                          roles#destroy
+                new_user_session GET    /users/sign_in(.:format)                                                      devise/sessions#new
+                    user_session POST   /users/sign_in(.:format)                                                      devise/sessions#create
+            destroy_user_session DELETE /users/sign_out(.:format)                                                     devise/sessions#destroy
+                   user_password POST   /users/password(.:format)                                                     devise/passwords#create
+               new_user_password GET    /users/password/new(.:format)                                                 devise/passwords#new
+              edit_user_password GET    /users/password/edit(.:format)                                                devise/passwords#edit
+                                 PUT    /users/password(.:format)                                                     devise/passwords#update
+        cancel_user_registration GET    /users/cancel(.:format)                                                       devise/registrations#cancel
+               user_registration POST   /users(.:format)                                                              devise/registrations#create
+           new_user_registration GET    /users/sign_up(.:format)                                                      devise/registrations#new
+          edit_user_registration GET    /users/edit(.:format)                                                         devise/registrations#edit
+                                 PUT    /users(.:format)                                                              devise/registrations#update
+                                 DELETE /users(.:format)                                                              devise/registrations#destroy
+               order_order_sents GET    /orders/:order_id/order_sents(.:format)                                       order_sents#index
+                                 POST   /orders/:order_id/order_sents(.:format)                                       order_sents#create
+            new_order_order_sent GET    /orders/:order_id/order_sents/new(.:format)                                   order_sents#new
+           edit_order_order_sent GET    /orders/:order_id/order_sents/:id/edit(.:format)                              order_sents#edit
+                order_order_sent GET    /orders/:order_id/order_sents/:id(.:format)                                   order_sents#show
+                                 PUT    /orders/:order_id/order_sents/:id(.:format)                                   order_sents#update
+                                 DELETE /orders/:order_id/order_sents/:id(.:format)                                   order_sents#destroy
+                          orders GET    /orders(.:format)                                                             orders#index
+                                 POST   /orders(.:format)                                                             orders#create
+                       new_order GET    /orders/new(.:format)                                                         orders#new
+                      edit_order GET    /orders/:id/edit(.:format)                                                    orders#edit
+                           order GET    /orders/:id(.:format)                                                         orders#show
+                                 PUT    /orders/:id(.:format)                                                         orders#update
+                                 DELETE /orders/:id(.:format)                                                         orders#destroy
+                           notes GET    /notes(.:format)                                                              notes#index
+                                 POST   /notes(.:format)                                                              notes#create
+                        new_note GET    /notes/new(.:format)                                                          notes#new
+                       edit_note GET    /notes/:id/edit(.:format)                                                     notes#edit
+                            note GET    /notes/:id(.:format)                                                          notes#show
+                                 PUT    /notes/:id(.:format)                                                          notes#update
+                                 DELETE /notes/:id(.:format)                                                          notes#destroy
+                lookup_outgoings GET    /outgoings/lookup(.:format)                                                   outgoings#lookup
+                       outgoings GET    /outgoings(.:format)                                                          outgoings#index
+                                 POST   /outgoings(.:format)                                                          outgoings#create
+                    new_outgoing GET    /outgoings/new(.:format)                                                      outgoings#new
+                   edit_outgoing GET    /outgoings/:id/edit(.:format)                                                 outgoings#edit
+                        outgoing GET    /outgoings/:id(.:format)                                                      outgoings#show
+                                 PUT    /outgoings/:id(.:format)                                                      outgoings#update
+                                 DELETE /outgoings/:id(.:format)                                                      outgoings#destroy
+                      executions GET    /executions(.:format)                                                         executions#index
+                                 POST   /executions(.:format)                                                         executions#create
+                   new_execution GET    /executions/new(.:format)                                                     executions#new
+                  edit_execution GET    /executions/:id/edit(.:format)                                                executions#edit
+                       execution GET    /executions/:id(.:format)                                                     executions#show
+                                 PUT    /executions/:id(.:format)                                                     executions#update
+                                 DELETE /executions/:id(.:format)                                                     executions#destroy
+                lookup_incomings GET    /incomings/lookup(.:format)                                                   incomings#lookup
+                  incoming_notes GET    /incomings/:incoming_id/notes(.:format)                                       incomings/notes#index
+                                 POST   /incomings/:incoming_id/notes(.:format)                                       incomings/notes#create
+               new_incoming_note GET    /incomings/:incoming_id/notes/new(.:format)                                   incomings/notes#new
+              edit_incoming_note GET    /incomings/:incoming_id/notes/:id/edit(.:format)                              incomings/notes#edit
+                   incoming_note GET    /incomings/:incoming_id/notes/:id(.:format)                                   incomings/notes#show
+                                 PUT    /incomings/:incoming_id/notes/:id(.:format)                                   incomings/notes#update
+                                 DELETE /incomings/:incoming_id/notes/:id(.:format)                                   incomings/notes#destroy
+    incoming_execution_outgoings GET    /incomings/:incoming_id/executions/:execution_id/outgoings(.:format)          incomings/executions/outgoings#index
+                                 POST   /incomings/:incoming_id/executions/:execution_id/outgoings(.:format)          incomings/executions/outgoings#create
+ new_incoming_execution_outgoing GET    /incomings/:incoming_id/executions/:execution_id/outgoings/new(.:format)      incomings/executions/outgoings#new
+edit_incoming_execution_outgoing GET    /incomings/:incoming_id/executions/:execution_id/outgoings/:id/edit(.:format) incomings/executions/outgoings#edit
+     incoming_execution_outgoing GET    /incomings/:incoming_id/executions/:execution_id/outgoings/:id(.:format)      incomings/executions/outgoings#show
+                                 PUT    /incomings/:incoming_id/executions/:execution_id/outgoings/:id(.:format)      incomings/executions/outgoings#update
+                                 DELETE /incomings/:incoming_id/executions/:execution_id/outgoings/:id(.:format)      incomings/executions/outgoings#destroy
+             incoming_executions GET    /incomings/:incoming_id/executions(.:format)                                  incomings/executions#index
+                                 POST   /incomings/:incoming_id/executions(.:format)                                  incomings/executions#create
+          new_incoming_execution GET    /incomings/:incoming_id/executions/new(.:format)                              incomings/executions#new
+         edit_incoming_execution GET    /incomings/:incoming_id/executions/:id/edit(.:format)                         incomings/executions#edit
+              incoming_execution GET    /incomings/:incoming_id/executions/:id(.:format)                              incomings/executions#show
+                                 PUT    /incomings/:incoming_id/executions/:id(.:format)                              incomings/executions#update
+                                 DELETE /incomings/:incoming_id/executions/:id(.:format)                              incomings/executions#destroy
+                       incomings GET    /incomings(.:format)                                                          incomings#index
+                                 POST   /incomings(.:format)                                                          incomings#create
+                    new_incoming GET    /incomings/new(.:format)                                                      incomings#new
+                   edit_incoming GET    /incomings/:id/edit(.:format)                                                 incomings#edit
+                        incoming GET    /incomings/:id(.:format)                                                      incomings#show
+                                 PUT    /incomings/:id(.:format)                                                      incomings#update
+                                 DELETE /incomings/:id(.:format)                                                      incomings#destroy
+                     admin_users GET    /admin/users(.:format)                                                        admin/users#index
+                 edit_admin_user GET    /admin/users/:id/edit(.:format)                                               admin/users#edit
+                      admin_user GET    /admin/users/:id(.:format)                                                    admin/users#show
+                                 PUT    /admin/users/:id(.:format)                                                    admin/users#update
+                                 DELETE /admin/users/:id(.:format)                                                    admin/users#destroy
+                  user_incomings GET    /user/incomings(.:format)                                                     user/incomings#index
+                   user_incoming GET    /user/incomings/:id(.:format)                                                 user/incomings#show
+                  user_outgoings GET    /user/outgoings(.:format)                                                     user/outgoings#index
+                   user_outgoing GET    /user/outgoings/:id(.:format)                                                 user/outgoings#show
+                 user_executions GET    /user/executions(.:format)                                                    user/executions#index
+                  user_execution GET    /user/executions/:id(.:format)                                                user/executions#show
+                      user_notes GET    /user/notes(.:format)                                                         user/notes#index
+                       user_note GET    /user/notes/:id(.:format)                                                     user/notes#show
+                  user_internals GET    /users/:user_id/internals(.:format)                                           internals#index
+                                 POST   /users/:user_id/internals(.:format)                                           internals#create
+               new_user_internal GET    /users/:user_id/internals/new(.:format)                                       internals#new
+              edit_user_internal GET    /users/:user_id/internals/:id/edit(.:format)                                  internals#edit
+                   user_internal GET    /users/:user_id/internals/:id(.:format)                                       internals#show
+                                 PUT    /users/:user_id/internals/:id(.:format)                                       internals#update
+                                 DELETE /users/:user_id/internals/:id(.:format)                                       internals#destroy
+                       edit_user GET    /users/:id/edit(.:format)                                                     users#edit
+                            user GET    /users/:id(.:format)                                                          users#show
+                                 PUT    /users/:id(.:format)                                                          users#update
+                         contact        /contact(.:format)                                                            pages#contact
+                           about        /about(.:format)                                                              pages#about
+                            help        /help(.:format)                                                               pages#help
+                            root        /                                                                             pages#home

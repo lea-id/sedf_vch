@@ -1,0 +1,43 @@
+= form_for @order do |f|
+  -if @order.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
+
+  //:javascript
+  //  $(function() {
+  //    $( "#incoming_doc_date" ).datepicker($.datepicker.regional['ru']);
+  //  });
+  
+  :javascript
+    window.onload = function(){
+      new JsDatePick({
+        useMode:2,
+        target:"order_sign_date",
+        dateFormat:"%d.%m.%Y"
+      });
+    };
+
+  .field
+    = f.label :sign_date, 'Дата подписи'
+    = f.text_field :sign_date, :value => Date.current.strftime("%d.%m.%Y")
+    //= f.date_select :sign_date
+  .field
+    = f.label :someone, 'Кто подписал или откуда получен приказ (директива). Дата и номер сопросодительного письма'
+    %br
+    = f.text_area :someone
+  .field
+    = f.label :description, 'Краткое содержание приказа (директивы)'
+    %br
+    = f.text_area :description
+  .field
+    = f.label :copy_count, 'Количество экз.'
+    = f.number_field :copy_count
+  .field
+    = f.label :attach, "Электронная копия документа"
+    = @order.attach
+    = f.file_field :attach
+  .actions
+    = f.submit 'Сохранить'

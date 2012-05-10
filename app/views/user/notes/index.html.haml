@@ -1,0 +1,30 @@
+%h1 Мои документы (ознакомление)
+
+%table{:border => "1"}
+  %tr
+    %th № п/п
+    %th Номер и дата служебного документа
+    %th Дата поступления служебного документа в воинскую часть
+    %th Наименование или краткое содержание служебного документа
+    %th Кому объявлен (до кого доведен) служебный документ и дата
+    %th
+  %tr
+    %th 1
+    %th 2
+    %th 3
+    %th 4
+    %th 5
+    %th
+
+  - @notes.each do |note|
+    %tr
+      %td= note.serial_no
+      %td= "№ " + @incoming.doc_no + " от "+ @incoming.doc_date.strftime("%d.%m.%Y г.")
+      %td= note.date_incoming.strftime("%d.%m.%Y г.")
+      %td= @incoming.description
+      %td= note.user_id.nil? ? "" : User.find_by_id(note.user_id).fullname + " " + note.date_finishing.strftime("%d.%m.%Y г.")
+      %td= link_to 'Показать', user_notes_path(note)
+
+%br
+
+//= link_to 'Назад', user_path(current_user)

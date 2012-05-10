@@ -1,0 +1,23 @@
+= form_for ([@user, @internal]) do |f|
+  -if @internal.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@internal.errors.count, "error")} prohibited this internal from being saved:"
+      %ul
+        - @internal.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title, 'Наименование'
+    = f.text_field :title
+  .field
+    = f.label :description, 'Краткое содержание документа'
+    = f.text_field :description
+  .field
+    = f.label :attach, "Электронная копия документа"
+    = @internal.attach
+    = f.text_field :attach
+  //.field
+  //  = f.label :user
+  //  = f.text_field :user
+  .actions
+    = f.submit 'Save'

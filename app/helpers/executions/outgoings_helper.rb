@@ -1,0 +1,2 @@
+module Executions::OutgoingsHelper
+end

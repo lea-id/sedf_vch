@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%p
+  %b Поручение должностного лица по исполнению документа
+  = @execution.resolution
+  %br
+  %b Срок исполнения документа
+  = @execution.execute_to.strftime("%d.%m.%Y")
+  %br
+  %b Исполнитель
+  //= @execution.user_id
+  = @user.fullname
+  %br
+  %b Данные контроля
+  = @execution.data_control
+  %br
+  %b Основание для снятия с контроля
+  = @execution.done
+
+= link_to 'Изменить', edit_incoming_execution_path(@incoming, @execution)
+\|
+= link_to 'Назад', incoming_executions_path(@incoming)

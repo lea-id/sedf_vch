@@ -1,0 +1,2 @@
+module Incomings::NotesHelper
+end

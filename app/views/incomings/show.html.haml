@@ -1,0 +1,62 @@
+%p#notice= notice
+
+/*%p
+/*  %b Serial no1:
+/*  = @incoming.serial_no1
+/*%p
+/*  %b Doc no:
+/*  = @incoming.doc_no
+/*%p
+/*  %b Doc date:
+/*  = @incoming.doc_date
+/*%p
+/*  %b Date:
+/*  = @incoming.date
+/*%p
+/*  %b Address:
+/*  = @incoming.address
+/*%p
+/*  %b Description:
+/*  = @incoming.description
+/*%p
+/*  %b Copy count:
+/*  = @incoming.copy_count
+/*%p
+/*  %b Copy no:
+/*  = @incoming.copy_no
+/*%p
+/*  %b Pages:
+/*  = @incoming.pages
+/*%p
+/*  %b Serial no2:
+/*  = @incoming.serial_no2
+/*%p
+/*  %b User id:
+/*  = @incoming.user_id
+/*%p
+/*  %b In out no:
+/*  = @incoming.in_out_no
+/*%p
+/*  %b Delo no:
+/*  = @incoming.delo_no
+/*%p
+/*  %b Delo pages:
+/*  = @incoming.delo_pages
+
+-if @incoming.attach?
+  -if !@incoming.is_pdf(@incoming.attach.url)
+    %img{:src => @incoming.attach, :width => "100%"}
+  -if @incoming.is_pdf(@incoming.attach.url)
+    :javascript
+      window.onload = function (){
+        var success = new PDFObject({ url: @incoming.attach }).embed("pdf");
+      };
+    #pdf
+      %object{:data => @incoming.attach.url, :height => "100%", :type => "application/pdf", :width => "100%"}
+-else
+  %p
+    %b Электронная копия документа отсутствует
+
+= link_to 'Изменить', edit_incoming_path(@incoming)
+\|
+= link_to 'Назад', incomings_path

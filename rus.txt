@@ -1,0 +1,19 @@
+Ruby on Rails 3.0 и выше
+В вашем Gemfile сделайте ссылку на gem russian:
+
+
+gem 'russian', '~> 0.6.0'
+И установите gem в проект с помощью bundler:
+
+bundle install или bundle update.
+
+Далее, укажите
+
+
+config.i18n.default_locale = :ru
+в config/application.rb.
+
+перевод русской строки в нижний регистр
+str = "Привет"
+str.mb_chars.downcase.to_s
+#=> "привет"

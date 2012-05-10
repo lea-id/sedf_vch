@@ -1,0 +1,38 @@
+%p#notice= notice
+
+//%p
+//  %b Year at:
+//  = @order.year_at
+//%p
+//  %b Serial no:
+//  = @order.serial_no
+//%p
+//  %b Sign date:
+//  = @order.sign_date
+//%p
+//  %b Someone:
+//  = @order.someone
+//%p
+//  %b Description:
+//  = @order.description
+//%p
+//  %b Copy count:
+//  = @order.copy_count
+
+-if @order.attach?
+  -if !@order.is_pdf(@order.attach.url)
+    %img{:src => @order.attach, :width => "100%"}
+  -if @order.is_pdf(@order.attach.url)
+    :javascript
+      window.onload = function (){
+        var success = new PDFObject({ url: @order.attach }).embed("pdf");
+      };
+    #pdf
+      %object{:data => @order.attach.url, :height => "100%", :type => "application/pdf", :width => "100%"}
+-else
+  %p
+    %b Электронная копия документа отсутствует
+
+= link_to 'Изменить', edit_order_path(@order)
+\|
+= link_to 'Назад', orders_path

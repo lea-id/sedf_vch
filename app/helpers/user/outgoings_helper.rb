@@ -1,0 +1,2 @@
+module User::OutgoingsHelper
+end

@@ -1,0 +1,23 @@
+%h1 Мои служебные документы
+
+%table{:border => "1"}
+  %tr
+    %th Наименование
+    %th Краткое содержание документа
+    %th
+    %th
+    %th
+
+  - @internals.each do |internal|
+    %tr
+      %td= internal.title
+      %td= internal.description
+      %td= link_to 'Показать', user_internal_path(current_user, internal)
+      %td= link_to 'Изменить', edit_user_internal_path(current_user, internal)
+      %td= link_to 'Удалить', user_internal_path(current_user, internal), :confirm => 'Вы уверены?', :method => :delete
+
+%br
+
+= link_to 'Новый документ', new_user_internal_path(current_user)
+//\|
+//= link_to 'Назад', user_path(current_user)

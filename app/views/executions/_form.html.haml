@@ -1,0 +1,37 @@
+= form_for([@execution]) do |f|
+  -if @execution.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@execution.errors.count, "error")} prohibited this execution from being saved:"
+      %ul
+        - @execution.errors.full_messages.each do |msg|
+          %li= msg
+
+  :javascript
+    window.onload = function(){
+      new JsDatePick({
+        useMode:2,
+        target:"execution_execute_to",
+        dateFormat:"%d.%m.%Y"
+      });
+    };
+
+  .field
+    = f.label :resolution, 'Поручение должностного лица по исполнению документа'
+    = f.text_field :resolution
+  .field
+    = f.label :execute_to, 'Срок исполнения'
+    - if @execution.execute_to == nil
+      = f.text_field :execute_to, :value => Date.current.strftime("%d.%m.%Y")
+    - else
+      = f.text_field :execute_to, :value => @execution.execute_to.strftime("%d.%m.%Y")
+  .field
+    = f.label :user_id, 'Исполнитель'
+    = f.select("user_id", User.where(:admin => false).order("id").collect {|p| [ p.fullname, p.id ] }, { :prompt => true, :include_blank => false })
+  .field
+    = f.label :data_control, 'Данные контроля'
+    = f.text_field :data_control
+  .field
+    = f.label :done, 'Основание для снятия с контроля'
+    = f.text_field :done
+  .actions
+    = f.submit 'Сохранить'

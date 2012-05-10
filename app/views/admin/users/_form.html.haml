@@ -1,0 +1,22 @@
+= form_for([:admin, @user]) do |f|
+  = render 'shared/error_messages', :object => f.object
+  .field
+    = f.label :username
+    %br
+    = f.text_field :username
+  //- if can? :read, Role
+  .field
+    = f.label :roles
+    %br
+    - @roles.each do |role|
+      = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+      = role.name
+      %br
+  .field
+    = f.label :activated
+    %br
+    = f.check_box :activated
+  .actions
+    = f.submit "Обновить"
+  = gravatar_for @user
+  %a{:href => "http://gravatar.com/emails"} Изменить граватар

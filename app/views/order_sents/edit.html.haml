@@ -1,0 +1,7 @@
+%h1 Изменение документа
+
+= render 'form'
+
+= link_to 'Показать', order_order_sent_path(@order, @ordersent)
+\|
+= link_to 'Назад', order_order_sents_path(@order)
