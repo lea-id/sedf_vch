@@ -58,7 +58,7 @@ group :development do
   gem 'annotate'
 end
 
-group :test do
-  gem 'rspec-rails'
-  gem 'webrat'
-end
+#group :test do
+#  gem 'rspec-rails'
+#  gem 'webrat'
+#end
