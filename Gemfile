@@ -22,6 +22,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancan'
 #gem 'unicode_utils' # Unicode Utils - Unicode algorithms for Ruby 1.9
+gem heroku
 
 # Gems used only for assets and not required
 # in production environments by default.
