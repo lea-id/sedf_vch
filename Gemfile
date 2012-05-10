@@ -59,6 +59,10 @@ group :development do
   gem 'annotate'
 end
 
+group :production do
+  gem 'thin'
+end
+
 group :test do
   gem 'rspec-rails'
   gem 'webrat'
